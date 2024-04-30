@@ -48,7 +48,7 @@
                                     <td>{{ $fellow->email }}</td>
                                     <td>{{ $fellow->phone }}</td>
                                     <td>
-                                        <a href="{{ asset('storage/' . $fellow->resume) }}" target="_blank">View</a>
+                                        <a href="{{ route('viewResume', $fellow->id) }}" target="_blank">View</a>
                                     </td>
                                     <td>{{ $fellow->track->name }}</td>
                                     <td>
@@ -108,7 +108,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                
                             @endforeach
                         </tbody>
                     </table>

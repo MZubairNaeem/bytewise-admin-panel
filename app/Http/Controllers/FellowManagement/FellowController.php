@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Models\Fellow;
 use App\Models\Question;
 use App\Models\Track;
+use Illuminate\Support\Facades\Storage;
+
 use App\Models\User;
 
 use Illuminate\Support\Facades\Mail;
@@ -139,5 +141,26 @@ class FellowController extends Controller
             return $user->hasPermissionTo($answer4);
         });
         return view('menu.fellows.shortlisted.detail', compact('fellow', 'answer1', 'answer2', 'answer3', 'answer4', 'answer5', 'questions', 'leads'));
+    }
+    public function viewResume($id)
+    {
+        $fellow = Fellow::find($id);
+        $filename = $fellow->resume;
+        if ($filename) {
+            if (Storage::disk('public')->exists('resume/' . $filename)) {
+                // Get the file path
+                $filePath = storage_path('app/public/resume/' . $filename);
+
+                // Return the file as a response
+                return response()->file($filePath);
+            } else {
+                // Return a 404 error if the file does not exist
+                abort(404);
+            }
+        } else {
+            return redirect()->back()->with('error', 'No resume found');
+        }
+        // Check if the file exists
+
     }
 }

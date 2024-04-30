@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="container my-5 d-flex justify-content-center align-items-center">
-        <div class="col-8">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header d-flex align-items-center">
                     <div class="col">
@@ -14,13 +14,13 @@
                             <img src="{{ URL::asset('images/header-white.png') }}" alt="">
                         </div>
                         <div>
-                            @include('partials.session')
+                            @include('partials.session-apply')
                         </div>
 
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('submitform') }}" method="POST">
+                    <form action="{{ route('submitform') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('POST')
 
@@ -38,8 +38,10 @@
                         </div>
                         <div class="my-2">
                             <label class="form-label">Resume<span class="text-danger"> *</span></label>
-                            <input required class="form-control" type="file" name="resume">
+                            <input required class="form-control" id="resume" type="file" name="resume">
+                            <span id="resume-error" class="text-danger"></span>
                         </div>
+
                         <div class="my-2">
                             <label class="form-label">{{ $questions[0]->question }}<span class="text-danger">
                                     *</span></label>
@@ -90,3 +92,25 @@
     <script src="{{ URL::asset('assets/js/pages/password-addon.init.js') }}"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
 @endsection
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('resume').addEventListener('change', function() {
+            var fileInput = this;
+            var file = fileInput.files[0];
+            var allowedTypes = ['application/pdf'];
+            var maxFileSize = 2 * 1024 * 1024; // 2MB
+
+            if (file) {
+                if (allowedTypes.indexOf(file.type) === -1) {
+                    document.getElementById('resume-error').textContent = 'Please select a PDF file.';
+                    fileInput.value = ''; // Clear the file input
+                } else if (file.size > maxFileSize) {
+                    document.getElementById('resume-error').textContent = 'File size exceeds 2MB.';
+                    fileInput.value = ''; // Clear the file input
+                } else {
+                    document.getElementById('resume-error').textContent = '';
+                }
+            }
+        });
+    });
+</script>

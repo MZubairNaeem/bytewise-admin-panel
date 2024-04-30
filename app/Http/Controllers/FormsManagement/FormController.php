@@ -58,7 +58,6 @@ class FormController extends Controller
 
     public function submitform(Request $request)
     {
-        // dd($request->all());
         $fellows = new Fellow();
         $fellows->name = $request->name;
         $fellows->email = $request->email;
@@ -75,6 +74,13 @@ class FormController extends Controller
             $answers->save();
         }
 
+        if ($request->hasFile('resume')) {
+            $fileName = time() . $request->file('resume')->getClientOriginalName();
+            $fileName = str_replace(' ', '', $fileName);
+            $path = $request->file('resume')->storeAs('resume', $fileName, 'public');
+            $fellows->resume = $fileName;
+            $fellows->save();
+        }
 
         // Mail::to($fellows->email)->send(new ApplyMail());
 

@@ -47,7 +47,8 @@
                                     <td><?php echo e($fellow->email); ?></td>
                                     <td><?php echo e($fellow->phone); ?></td>
                                     <td>
-                                        <a href="<?php echo e(asset('storage/' . $fellow->resume)); ?>" target="_blank">View</a>
+                                        <a href="<?php echo e(route('viewResume', $fellow->id)); ?>" target="_blank">View</a>
+
                                     </td>
                                     <td><?php echo e($fellow->track->name); ?></td>
                                     <td>
@@ -111,7 +112,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                     </table>

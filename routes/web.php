@@ -56,6 +56,8 @@ Route::controller(FellowController::class)->group(function () {
         //fellow details
         Route::get('/applied/details/{id}', 'showApplied')->name('applied-fellow-details');
         Route::get('/shortlist/details/{id}', 'showShortlisted')->name('shortlisted-fellow-details');
+        //resume 
+        Route::get('/view-resume/{id}', 'viewResume')->name('viewResume');
         //delete fellow
         Route::delete('/delete/{id}', 'destroy')->name('delete-fellow');
     });
