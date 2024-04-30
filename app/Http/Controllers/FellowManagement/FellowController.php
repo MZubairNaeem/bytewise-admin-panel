@@ -65,7 +65,7 @@ class FellowController extends Controller
         $fellow->shortlisted = 1;
         $fellow->save();
 
-        Mail::to($fellow->email)->send(new ShortListMail());
+        // Mail::to($fellow->email)->send(new ShortListMail());
         return response()->json(
             [
                 'success' => true,
@@ -93,7 +93,7 @@ class FellowController extends Controller
         $fellow->save();
 
 
-        Mail::to($fellow->email)->send(new SelectMail());
+        // Mail::to($fellow->email)->send(new SelectMail());
 
         return redirect()->back()->with('success', 'Fellow Selected');
     }
