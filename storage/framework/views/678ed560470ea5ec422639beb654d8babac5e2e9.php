@@ -1,16 +1,15 @@
-@extends('layouts.master')
-@section('title')
+<?php $__env->startSection('title'); ?>
     Group-links
-@endsection
-@section('content')
-    @component('components.breadcrumb')
-        @slot('li_1')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
+    <?php $__env->startComponent('components.breadcrumb'); ?>
+        <?php $__env->slot('li_1'); ?>
             Dashboard
-        @endslot
-        @slot('title')
+        <?php $__env->endSlot(); ?>
+        <?php $__env->slot('title'); ?>
             Group-links
-        @endslot
-    @endcomponent
+        <?php $__env->endSlot(); ?>
+    <?php echo $__env->renderComponent(); ?>
     <p>Working on this!</p>
     <div class="container my-5 d-flex justify-content-center align-items-center">
         <div class="col-8">
@@ -19,15 +18,15 @@
                     <div class="col">
                         <h1 class="">Fellowship - Group Links</h1>
                         <div>
-                            @include('partials.session')
+                            <?php echo $__env->make('partials.session', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                         </div>
 
                     </div>
                 </div>
                 <div class="card-body">
                     <form action="">
-                        @csrf
-                        @method('POST')
+                        <?php echo csrf_field(); ?>
+                        <?php echo method_field('POST'); ?>
                         <div class="my-2">
                             <label class="form-label">Laravel</label>
                             <input class="form-control" type="text" name="link">
@@ -136,20 +135,22 @@
             </div>
         </div>
     </div>
-@endsection
-@section('script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
     <!-- apexcharts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="{{ URL::asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="<?php echo e(URL::asset('assets/libs/apexcharts/apexcharts.min.js')); ?>"></script>
 
     <!-- Vector map-->
-    <script src="{{ URL::asset('assets/libs/jsvectormap/jsvectormap.min.js') }}"></script>
+    <script src="<?php echo e(URL::asset('assets/libs/jsvectormap/jsvectormap.min.js')); ?>"></script>
 
     <!-- Widget init -->
-    <script src="{{ URL::asset('assets/js/pages/widgets.init.js') }}"></script>
+    <script src="<?php echo e(URL::asset('assets/js/pages/widgets.init.js')); ?>"></script>
 
-    <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+    <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 
-    <script src="{{ URL::asset('assets/js/pages/datatables.init.js') }}"></script>
-@endsection
+    <script src="<?php echo e(URL::asset('assets/js/pages/datatables.init.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH Z:\Bytewise\interactive\resources\views/menu/group_links/group-link.blade.php ENDPATH**/ ?>

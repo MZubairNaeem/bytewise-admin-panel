@@ -1,7 +1,6 @@
-@extends('layouts.master-without-nav')
-@section('title')
-    @lang('translation.signin')
-@endsection
+<?php $__env->startSection('title'); ?>
+    <?php echo app('translator')->get('translation.signin'); ?>
+<?php $__env->stopSection(); ?>
 <style>
     .custom-btn {
         background-color: #12316b !important;
@@ -29,7 +28,7 @@
         display: inline-block !important;
     }
 </style>
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="auth-page-wrapper pt-5">
         <!-- auth page bg -->
         <div class="auth-one-bg-position auth-one-bg custom-auth-bg" id="auth-particles">
@@ -69,18 +68,32 @@
                                     <p class="text-muted">Sign in to continue to Bytewise Admin Panel.</p>
                                 </div>
                                 <div class="p-2 mt-4">
-                                    <form action="{{ route('login') }}" method="POST">
-                                        @csrf
+                                    <form action="<?php echo e(route('login')); ?>" method="POST">
+                                        <?php echo csrf_field(); ?>
                                         <div class="mb-3">
                                             <label for="username" class="form-label">Username</label>
-                                            <input type="text" class="form-control @error('email') is-invalid @enderror"
+                                            <input type="text" class="form-control <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
                                                 value="" id="username" name="email"
                                                 placeholder="Enter username">
-                                            @error('email')
+                                            <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
+                                                    <strong><?php echo e($message); ?></strong>
                                                 </span>
-                                            @enderror
+                                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label" for="password-input">Password</label>
@@ -88,7 +101,14 @@
                                                 class="position-relative auth-pass-inputgroup mb-3">
                                                 <input x-bind:type="show ? 'text' : 'password'"
                                                     class="form-control pe-5 
-                                                    @error('password') is-invalid @enderror"
+                                                    <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
                                                     name="password" placeholder="Enter password" id="password-input"
                                                     value="">
                                                 <div class="position-absolute top-50 end-0 translate-middle-y me-3">
@@ -97,11 +117,18 @@
                                                         <i class="mdi mdi-eye-outline"
                                                             x-bind:class="{ 'mdi-eye': show, 'mdi-eye-outline': !show }"></i>
                                                     </a>
-                                                    @error('password')
+                                                    <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                                                         <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
+                                                            <strong><?php echo e($message); ?></strong>
                                                         </span>
-                                                    @enderror
+                                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                                 </div>
                                             </div>
                                             <div class="mt-4">
@@ -121,10 +148,12 @@
         </div>
         <!-- end auth page content -->
     </div>
-@endsection
-@section('script')
-    <script src="{{ URL::asset('assets/libs/particles.js/particles.js.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/js/pages/particles.app.js') }}"></script>
-    <script src="{{ URL::asset('assets/js/pages/password-addon.init.js') }}"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+    <script src="<?php echo e(URL::asset('assets/libs/particles.js/particles.js.min.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('assets/js/pages/particles.app.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('assets/js/pages/password-addon.init.js')); ?>"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master-without-nav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH Z:\Bytewise\interactive\resources\views/auth/login.blade.php ENDPATH**/ ?>
